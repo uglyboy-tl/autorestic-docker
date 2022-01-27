@@ -1,0 +1,3 @@
+[submodule "autorestic"]
+	path = autorestic
+	url = https://github.com/cupcakearmy/autorestic
