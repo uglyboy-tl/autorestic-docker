@@ -7,7 +7,7 @@ COPY ./autorestic .
 RUN go build
 
 FROM alpine
-RUN apk add --no-cache restic rclone
+RUN apk --update add --no-cache restic rclone
 COPY --from=builder /app/autorestic /usr/bin/autorestic
 RUN echo '*/5  *  *  *  *    /usr/bin/autorestic --ci cron' > /etc/crontabs/root
-CMD [ "crond", "-l 2", "-f"]
+CMD [ "crond", "-f"]
