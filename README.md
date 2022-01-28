@@ -5,10 +5,10 @@ Often it is usefully to trigger backups automatically. So in this image, it woul
 1. Create an initial config file (`autorestic.yml`) such as:
 ``` yml
 locations:
-    my-location:
-      from: /data
-      to: my-backend
-      cron: '0 3 * * 0' # Every Sunday at 3:00
+  my-location:
+    from: /data
+    to: my-backend
+    cron: '0 3 * * 0' # Every Sunday at 3:00
 ```
   You can read full [docs](https://autorestic.vercel.app/config) to configure it.
 
