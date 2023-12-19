@@ -8,6 +8,7 @@ locations:
   my-location:
     from: /data
     to: my-backend
+    forget: prune
     cron: '0 3 * * 0' # Every Sunday at 3:00
 ```
   You can read full [docs](https://autorestic.vercel.app/config) to configure it.
