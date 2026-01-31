@@ -8,8 +8,10 @@ RUN go build
 
 FROM alpine
 WORKDIR /root
-RUN apk --update add --no-cache restic rclone
+RUN apk --update add --no-cache restic rclone tini
 COPY --from=builder /app/autorestic /usr/bin/autorestic
 COPY ./hostname /etc/hostname
-RUN echo '*/5  *  *  *  *    /usr/bin/autorestic --ci cron' > /etc/crontabs/root
-CMD [ "crond", "-f"]
+RUN echo '*/5  *  *  *  *    /usr/bin/autorestic --ci cron 2>&1 | logger -t autorestic' > /etc/crontabs/root
+RUN mkdir -p /var/log/autorestic
+ENTRYPOINT [ "/sbin/tini", "--" ]
+CMD [ "crond", "-f", "-s", "-L", "/dev/stdout"]
