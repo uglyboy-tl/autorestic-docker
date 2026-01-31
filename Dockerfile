@@ -11,7 +11,6 @@ WORKDIR /root
 RUN apk --update add --no-cache restic rclone tini
 COPY --from=builder /app/autorestic /usr/bin/autorestic
 COPY ./hostname /etc/hostname
-RUN echo '*/5  *  *  *  *    /usr/bin/autorestic --ci cron 2>&1 | logger -t autorestic' > /etc/crontabs/root
-RUN mkdir -p /var/log/autorestic
+RUN echo '*/5  *  *  *  *    /usr/bin/autorestic --ci cron 2>&1' > /etc/crontabs/root
 ENTRYPOINT [ "/sbin/tini", "--" ]
 CMD [ "crond", "-f", "-L", "/dev/stdout"]
