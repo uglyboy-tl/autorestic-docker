@@ -14,4 +14,4 @@ COPY ./hostname /etc/hostname
 RUN echo '*/5  *  *  *  *    /usr/bin/autorestic --ci cron 2>&1 | logger -t autorestic' > /etc/crontabs/root
 RUN mkdir -p /var/log/autorestic
 ENTRYPOINT [ "/sbin/tini", "--" ]
-CMD [ "crond", "-f", "-s", "-L", "/dev/stdout"]
+CMD [ "crond", "-f", "-L", "/dev/stdout"]
